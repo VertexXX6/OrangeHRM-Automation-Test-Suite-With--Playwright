@@ -35,11 +35,13 @@ public class AdminTests {
     private String adminPassword;
     private static final Logger log = LoggerFactory.getLogger(AdminTests.class);
 
+    @BeforeTest
+    public void setUp() {
+        playwright = Playwright.create(); // Assign to class variable
+    }
+
     @BeforeMethod
     public void setUpMethod() throws IOException {
-        // Initialize Playwright
-        playwright = Playwright.create();
-
         // Load configuration
         Properties prop = new Properties();
         try (FileInputStream fis = new FileInputStream("src/test/resources/config.properties")) {
@@ -121,7 +123,6 @@ public class AdminTests {
             if (browser != null) browser.close();
         }
 
-        // Attach log
         Allure.addAttachment("Logs", new ByteArrayInputStream(
                 ("Test finished with status: " + (result.getStatus() == ITestResult.FAILURE ? "FAIL" : "PASS")).getBytes()));
     }
@@ -143,7 +144,7 @@ public class AdminTests {
     public void tearDown() {
         if (playwright != null) {
             playwright.close();
-            playwright = null; // Avoid reuse
+            playwright = null; // Prevent reuse
         }
     }
 }
