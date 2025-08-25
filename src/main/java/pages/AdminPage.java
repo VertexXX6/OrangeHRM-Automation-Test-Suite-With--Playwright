@@ -1,14 +1,14 @@
 package pages;
 
 import com.microsoft.playwright.*;
-import com.microsoft.playwright.options.LoadState;
+
 import com.microsoft.playwright.options.WaitForSelectorState;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 
 public class AdminPage {
-    private Page page;
+    private final Page page;
     private static final Logger log = LoggerFactory.getLogger(AdminPage.class);
     public AdminPage(Page page) {
         this.page = page;
