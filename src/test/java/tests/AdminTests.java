@@ -37,9 +37,9 @@ public class AdminTests {
 
     @BeforeTest
     public void setUp() {
-        Playwright playwright = Playwright.create();
-        Browser browser = playwright.chromium().launch(
-                new BrowserType.LaunchOptions().setHeadless(true)
+        playwright = Playwright.create();
+         browser = playwright.chromium().launch(
+                 new BrowserType.LaunchOptions().setHeadless(true)
         );
 
     }
