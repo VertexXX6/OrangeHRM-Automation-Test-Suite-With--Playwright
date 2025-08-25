@@ -35,15 +35,11 @@ public class AdminTests {
     private String adminPassword;
     private static final Logger log = LoggerFactory.getLogger(AdminTests.class);
 
-    @BeforeTest
-    public void setUp() {
-        playwright = Playwright.create();
-
-
-    }
-
     @BeforeMethod
     public void setUpMethod() throws IOException {
+        // Initialize Playwright
+        playwright = Playwright.create();
+
         // Load configuration
         Properties prop = new Properties();
         try (FileInputStream fis = new FileInputStream("src/test/resources/config.properties")) {
@@ -69,6 +65,7 @@ public class AdminTests {
         // Generate random username
         newUsername = "test.user" + (int)(Math.random() * 10000);
     }
+
     @Description("Verify Admin can add a new user")
     @Severity(SeverityLevel.CRITICAL)
     @Test(priority = 1)
@@ -89,11 +86,11 @@ public class AdminTests {
 
         assertEquals(newRecords, initialRecords + 1, "Record count should increase by 1 after adding a user");
     }
+
     @Description("Verify Admin can delete an user")
     @Severity(SeverityLevel.CRITICAL)
     @Test
     public void testDeleteUser() {
-        // Setup: Create a user to delete
         loginPage.login(adminUser, adminPassword);
         adminPage.clickAdminTab();
         adminPage.clickAddButton();
@@ -101,34 +98,32 @@ public class AdminTests {
         addUserPage.fillUserDetails("Admin", newUsername, "Enabled", newUsername, "Test@1234");
         addUserPage.save();
 
-        // Delete and verify
         int initialRecords = adminPage.getRecordCount();
         int recordsAfterDelete = adminPage.deleteSearchedUserAndGetCount(newUsername);
         log.info("Record count after deletion: {}", recordsAfterDelete);
 
         assertEquals(recordsAfterDelete, initialRecords - 1, "Record count should decrease by 1 after deleting a user");
     }
+
     @AfterMethod
     public void tearDownMethod(ITestResult result) {
-        captureFailure(result);
-
-        // Attach video to Allure
         try {
+            captureFailure(result);
             if (context != null && !context.pages().isEmpty()) {
                 Path videoPath = context.pages().getFirst().video().path();
                 Allure.addAttachment("Video", Files.newInputStream(videoPath));
             }
         } catch (Exception e) {
             log.error("Failed to attach video", e);
+        } finally {
+            if (page != null) page.close();
+            if (context != null) context.close();
+            if (browser != null) browser.close();
         }
 
         // Attach log
         Allure.addAttachment("Logs", new ByteArrayInputStream(
                 ("Test finished with status: " + (result.getStatus() == ITestResult.FAILURE ? "FAIL" : "PASS")).getBytes()));
-
-        if (page != null) page.close();
-        if (context != null) context.close();
-        if (browser != null) browser.close();
     }
 
     private void captureFailure(ITestResult result) {
@@ -137,7 +132,6 @@ public class AdminTests {
                 byte[] screenshot = page.screenshot();
                 Allure.addAttachment("Failure Screenshot", new ByteArrayInputStream(screenshot));
                 log.error("Screenshot captured for failed test: {}", result.getName());
-                // Save PNG locally too
                 page.screenshot(new Page.ScreenshotOptions().setPath(Paths.get("screenshots/" + result.getName() + ".png")));
             } catch (Exception e) {
                 log.error("Failed to capture screenshot", e);
@@ -147,6 +141,9 @@ public class AdminTests {
 
     @AfterTest
     public void tearDown() {
-        if (playwright != null) playwright.close();
+        if (playwright != null) {
+            playwright.close();
+            playwright = null; // Avoid reuse
+        }
     }
 }
