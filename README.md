@@ -104,7 +104,9 @@ The repository is configured with a **GitHub Actions** workflow to automatically
 To view the workflow status:
 1. Go to the **Actions** tab in your GitHub repository.
 2. Check the latest workflow run for success/failure details.
-
+## Accessing Test Artifacts
+- Screenshots for failed tests are uploaded as artifacts in GitHub Actions (see the "Artifacts" section in the Actions tab).
+- Allure reports are generated and uploaded after each run, accessible in the Actions tab.
 ## Allure Reporting
 The framework integrates **Allure** for detailed test reporting.
 
