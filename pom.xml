@@ -44,7 +44,7 @@
             <scope>test</scope>
         </dependency>
 
-        <!-- Allure Common (للسكرينشوت والـ attachments) -->
+        <!-- Allure Common -->
         <dependency>
             <groupId>io.qameta.allure</groupId>
             <artifactId>allure-java-commons</artifactId>
@@ -66,20 +66,23 @@
                 </configuration>
             </plugin>
 
-            <!-- Surefire plugin (لازم عشان TestNG يشتغل صح) -->
+            <!-- Surefire plugin -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>3.2.5</version>
                 <configuration>
                     <useSystemClassLoader>false</useSystemClassLoader>
+                    <systemPropertyVariables>
+                        <allure.results.directory>${project.build.directory}/allure-results</allure.results.directory>
+                    </systemPropertyVariables>
                     <includes>
                         <include>**/*Tests.java</include>
                     </includes>
                 </configuration>
             </plugin>
 
-            <!-- Allure plugin -->
+            <!-- Allure Maven plugin -->
             <plugin>
                 <groupId>io.qameta.allure</groupId>
                 <artifactId>allure-maven</artifactId>
