@@ -15,11 +15,11 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      # Set up JDK 11
+      # Set up JDK 23
       - name: Set up JDK
         uses: actions/setup-java@v4
         with:
-          java-version: '11'
+          java-version: '23'
           distribution: 'temurin'
 
       # Cache Maven dependencies to speed up builds
