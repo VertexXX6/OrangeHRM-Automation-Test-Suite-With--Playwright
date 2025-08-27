@@ -150,7 +150,6 @@ The framework integrates **Allure** for detailed test reporting.
    - Screenshots and videos for failed tests.
    - Test execution logs.
 
-![Allure Report Example](docs/allure-report-example.png)
 
 ## Troubleshooting
 - **Playwright Browser Issues**:
