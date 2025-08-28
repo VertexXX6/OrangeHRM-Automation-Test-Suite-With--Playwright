@@ -35,9 +35,8 @@ jobs:
 
       # Generate Allure report
       - name: Generate Allure report
-         if: always()
-          run: mvn allure:aggregate
-
+        if: always()
+        run: mvn allure:report
 
       # Upload raw Allure results as artifact
       - name: Upload Allure results
