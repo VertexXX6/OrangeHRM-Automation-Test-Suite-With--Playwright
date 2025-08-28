@@ -1,0 +1,3 @@
+"Status","Start Time","Stop Time","Duration in ms","Parent Suite","Suite","Sub Suite","Test Class","Test Method","Name","Description"
+"passed","Thu Aug 28 11:10:38 UTC 2025","Thu Aug 28 11:10:47 UTC 2025","8667","Surefire suite","Surefire test","tests.AdminTests","tests.AdminTests","testDeleteUser","testDeleteUser","Verify Admin can delete an user"
+"passed","Thu Aug 28 11:10:47 UTC 2025","Thu Aug 28 11:10:56 UTC 2025","8071","Surefire suite","Surefire test","tests.AdminTests","tests.AdminTests","testAddUser","testAddUser","Verify Admin can add a new user"
