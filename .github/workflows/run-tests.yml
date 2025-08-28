@@ -74,3 +74,7 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./allure-report
+
+      - name: Print Allure Report URL
+        run: echo "✅ Allure Report deployed at: https://VertexXX6.github.io/OrangeHRM-Automation-Test-Suite-With--Playwright/
+
