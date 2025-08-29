@@ -1,4 +1,6 @@
 # Admin Tests Automation Framework
+![Playwright](https://img.shields.io/badge/Playwright-2E2E5E?style=for-the-badge&logo=playwright&logoColor=white)
+![CI/CD](https://img.shields.io/badge/GitHub_Actions-2088FF?style=for-the-badge&logo=github-actions&logoColor=white)
 
 This repository contains an automated testing framework for testing admin functionalities in [OrangeHRM](https://www.orangehrm.com/) using **Playwright**, **TestNG**, and **Allure** reporting. The framework automates critical user management features (e.g., adding and deleting users) using the Page Object Model (POM) for maintainable, scalable code. It’s designed to help QA engineers validate OrangeHRM’s admin module with detailed reporting and CI/CD integration.
 
@@ -11,9 +13,6 @@ This repository contains an automated testing framework for testing admin functi
 - [GitHub Actions Integration](#github-actions-integration)
 - [Allure Reporting](#allure-reporting)
 - [Troubleshooting](#troubleshooting)
-- [Contributing](#contributing)
-- [Future Improvements](#future-improvements)
-- [License](#license)
 
 ## Prerequisites
 Before running the tests, ensure you have the following installed:
