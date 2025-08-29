@@ -1,8 +1,6 @@
 # Admin Tests Automation Framework
-![Playwright](https://img.shields.io/badge/Playwright-2E2E5E?style=for-the-badge&logo=playwright&logoColor=white)
-![CI/CD](https://img.shields.io/badge/GitHub_Actions-2088FF?style=for-the-badge&logo=github-actions&logoColor=white)
 
-This repository contains an automated testing framework for testing admin functionalities in [OrangeHRM](https://www.orangehrm.com/) using **Playwright**, **TestNG**, and **Allure** reporting. The framework automates critical user management features (e.g., adding and deleting users) using the Page Object Model (POM) for maintainable, scalable code. It’s designed to help QA engineers validate OrangeHRM’s admin module with detailed reporting and CI/CD integration.
+This repository contains an automated testing framework for testing admin functionalities in [OrangeHRM](https://www.orangehrm.com/) using **Playwright**, **TestNG**, and **Allure** reporting. The framework automates critical user management features (e.g., adding and deleting users) using the Page Object Model (POM) for maintainable, scalable code.
 
 ## Table of Contents
 - [Prerequisites](#prerequisites)
@@ -13,6 +11,9 @@ This repository contains an automated testing framework for testing admin functi
 - [GitHub Actions Integration](#github-actions-integration)
 - [Allure Reporting](#allure-reporting)
 - [Troubleshooting](#troubleshooting)
+- [Contributing](#contributing)
+- [Future Improvements](#future-improvements)
+- [License](#license)
 
 ## Prerequisites
 Before running the tests, ensure you have the following installed:
@@ -36,10 +37,9 @@ Before running the tests, ensure you have the following installed:
 │   │           ├── AddUserPage.java       # Page Object for adding users
 │   ├── test
 │   │   ├── java
-│   │   │   ├── base
-│   │   │   │   └── BaseTest.java         # Base class for test setup and error handling
-│   │   │   └── tests
-│   │   │       └── AdminTests.java       # Test cases for admin functionalities
+│   │   │   ├── tests
+│   │   │   │   ├── BaseTest.java         # Base class for test setup and error handling
+│   │   │   │   └── AdminTests.java       # Test cases for admin functionalities
 │   │   └── resources
 │   │       └── config.properties         # Configuration file for test settings
 ├── pom.xml                                   # Maven dependencies
@@ -47,11 +47,10 @@ Before running the tests, ensure you have the following installed:
 │   └── workflows
 │       └── maven.yml                     # GitHub Actions workflow
 ├── .gitignore                               # Ignored files (e.g., screenshots, allure-results)
-├── docs                                     # Documentation (e.g., screenshots)
 └── README.md                                # This file
 ```
 
-- Generated files like `screenshots/`, `allure-results/`, and `videos/` are excluded from Git (see `.gitignore`) and uploaded as artifacts in GitHub Actions.
+- Generated files like `screenshots/` and `allure-results/` are excluded from Git (see `.gitignore`) and uploaded as artifacts in GitHub Actions.
 
 ## Setup Instructions
 1. **Clone the Repository**:
@@ -117,7 +116,7 @@ The repository is configured with a **GitHub Actions** workflow to automatically
 
 ### Key Features of the Workflow:
 - Runs on `ubuntu-latest`.
-- Sets up JDK 11 and Maven (fixed to resolve compilation errors with Java 23).
+- Sets up JDK 11 and Maven.
 - Installs Playwright browsers.
 - Executes tests using `mvn test`.
 - Generates and uploads Allure reports and screenshots as artifacts.
@@ -156,4 +155,29 @@ The framework integrates **Allure** for detailed test reporting.
   - Verify Node.js is installed.
 - **Configuration Errors**:
   - Check `config.properties` for correct `baseUrl`, `adminUser`, and `adminPassword`.
-  - Ensure environment variables
+  - Ensure environment variables are set if used.
+- **Test Failures**:
+  - Review Allure reports for screenshots, videos, and logs.
+  - Ensure the OrangeHRM instance is accessible at the specified `baseUrl`.
+
+## Contributing
+Contributions are welcome! To contribute:
+1. Fork the repository.
+2. Create a new branch (`git checkout -b feature/your-feature`).
+3. Commit your changes (`git commit -m "Add your feature"`).
+4. Push to the branch (`git push origin feature/your-feature`).
+5. Open a pull request.
+
+**Guidelines**:
+- Follow the Page Object Model (POM) for new page classes.
+- Add Allure annotations (`@Description`, `@Severity`) to test methods.
+- Ensure tests are independent and clean up test data.
+- Update `README.md` if new features are added.
+
+## Future Improvements
+- Add tests for additional OrangeHRM modules (e.g., leave management, employee profiles).
+- Implement retry logic for flaky tests using TestNG's `IRetryAnalyzer`.
+- Support multiple browsers (Firefox, WebKit) via `PlaywrightFactory`.
+
+---
+*Last updated: August 27, 2025*
