@@ -1,6 +1,8 @@
 # Admin Tests Automation Framework
 
 This repository contains an automated testing framework for testing admin functionalities in [OrangeHRM](https://www.orangehrm.com/) using **Playwright**, **TestNG**, and **Allure** reporting. The framework automates critical user management features (e.g., adding and deleting users) using the Page Object Model (POM) for maintainable, scalable code.
+🎥 [Watch Sample Test Run Video](Visuals/Untitled video - Made with Clipchamp.gif)
+
 
 ## Table of Contents
 - [Prerequisites](#prerequisites)
